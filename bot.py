@@ -11,8 +11,12 @@ from telegram import Update
 from telegram.ext import Application, MessageHandler, CommandHandler, filters, ContextTypes
 
 # ===== НАСТРОЙКИ =====
-BOT_TOKEN = "8819556227:AAE3pZi1kEaD2UNAtoGZ0ZkGDv1yxv6KcyY"
-GEMINI_API_KEY = "AQ.Ab8RN6JNG5bIntai6VQN6au81c3z0o-hQ_VGa2cEY3f03DDKVg"
+import os
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+
+if not BOT_TOKEN or not GEMINI_API_KEY:
+    raise RuntimeError("Установи переменные окружения BOT_TOKEN и GEMINI_API_KEY")
 
 logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s",
